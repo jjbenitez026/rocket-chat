@@ -19,7 +19,7 @@ class User extends Request
      * @param array $query
      * @return Collection|boolean
      */
-    public static function listing($offset = null, $count = null, $query = [])
+    public static function listing($offset = null, $count = null, $query)
     {
         $parameters = [];
         if (!is_null($offset)) {
@@ -28,7 +28,7 @@ class User extends Request
         if (!is_null($count)) {
             $parameters['count'] = $count;
         }
-        if (!is_null($query) && is_array($query) && count($query) > 0) {
+        if (!is_null($query)) {
             $parameters['query'] = $query;
         }
 
