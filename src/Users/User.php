@@ -32,6 +32,7 @@ class User extends Request
             $parameters['query'] = $query;
         }
 
+        var_dump($parameters);
         static::send("users.list", "GET", $parameters);
 
         if (!static::getSuccess()) {
