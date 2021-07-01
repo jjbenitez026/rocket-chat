@@ -40,14 +40,16 @@ abstract class Request implements \JsonSerializable
      *
      * @param string $instance Protocol and domain, i.e. https://chat.me
      *
+     * @param bool $debug
      * @return null
      */
-    public static function setUrl($instance)
+    public static function setUrl($instance, $debug = false)
     {
         self::$client = new \GuzzleHttp\Client([
 
             "base_uri" => $instance . self::URI,
-            "allow_redirects" => ["track_redirects" => true]
+            "allow_redirects" => ["track_redirects" => true],
+            "debug" => $debug
         ]);
     }
 
@@ -97,13 +99,12 @@ abstract class Request implements \JsonSerializable
 
         // Get request options
         $options = self::getRequestOptions($method, $data, $files);
-        var_dump($options);
 
         // Do request
         $res = self::$client->request( // // TODO: Check api is available, catch the guzzle exception
             $method,
             $url,
-            array_merge($options, ['debug' => true])
+            array_merge($options)
         );
 
         $headersRedirect = $res->getHeader(\GuzzleHttp\RedirectMiddleware::HISTORY_HEADER);
