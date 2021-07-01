@@ -14,9 +14,12 @@ class User extends Request
     /**
      * Gets user listing
      *
+     * @param null $offset
+     * @param null $count
+     * @param array $query
      * @return Collection|boolean
      */
-    public static function listing($offset = null, $count = null)
+    public static function listing($offset = null, $count = null, $query = [])
     {
         $parameters = [];
         if (!is_null($offset)) {
@@ -24,6 +27,9 @@ class User extends Request
         }
         if (!is_null($count)) {
             $parameters['count'] = $count;
+        }
+        if (!is_null($query) && is_array($query) && count($query) > 0) {
+            $parameters['query'] = $query;
         }
 
         static::send("users.list", "GET", $parameters);
