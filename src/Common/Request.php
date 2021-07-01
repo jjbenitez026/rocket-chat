@@ -102,7 +102,7 @@ abstract class Request implements \JsonSerializable
         $res = self::$client->request( // // TODO: Check api is available, catch the guzzle exception
             $method,
             $url,
-            $options
+            array_merge($options, ['debug' => true])
         );
 
         $headersRedirect = $res->getHeader(\GuzzleHttp\RedirectMiddleware::HISTORY_HEADER);
