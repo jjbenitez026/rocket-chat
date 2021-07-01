@@ -97,6 +97,7 @@ abstract class Request implements \JsonSerializable
 
         // Get request options
         $options = self::getRequestOptions($method, $data, $files);
+        var_dump($options);
 
         // Do request
         $res = self::$client->request( // // TODO: Check api is available, catch the guzzle exception
